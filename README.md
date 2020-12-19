@@ -1,6 +1,6 @@
 # Versions
 
-This workflow lets you copy and paste version information of an app or the OS with a few keystrokes.
+This [Alfred](https://www.alfredapp.com/) workflow lets you copy and paste version information of an app or the OS with a few keystrokes.
 
 ![img](https://i.imgur.com/cVPRh4v.jpg)
 
