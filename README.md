@@ -2,6 +2,8 @@
 
 This [Alfred](https://www.alfredapp.com/) workflow lets you copy and paste version information of an app or the OS with a few keystrokes.
 
+Download the latest `Versions.alfredworkflow` in [Releases](https://github.com/johan456789/Versions.alfredworkflow/releases).
+
 ![img](https://i.imgur.com/cVPRh4v.jpg)
 
 Example outputs:
