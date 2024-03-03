@@ -1,4 +1,4 @@
-from plistlib import readPlist
+import plistlib
 from AppKit import NSWorkspace
 from sys import stdout
 from sys import argv
@@ -28,9 +28,11 @@ if path == '':
 
 path += '/Contents/Info.plist'
 try:
-    info = readPlist(path)
+    with open(path, 'rb') as f:
+        info = plistlib.load(f)
 except(ExpatError):  # binary plist
-    info = readPlist(binary_plist_to_file_obj(path))
+    with open(binary_plist_to_file_obj(path), 'rb') as f:
+        info = plistlib.load(f)
 
 appName = info.get('CFBundleExecutable')
 if 'CFBundleDisplayName' in info:
