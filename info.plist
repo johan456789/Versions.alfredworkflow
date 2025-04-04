@@ -8,6 +8,29 @@
 	<string>Tools</string>
 	<key>connections</key>
 	<dict>
+		<key>0E27CEEA-DBBC-45EB-B020-62F902056913</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>81EC5914-414E-40E5-88B7-66EA7517F6AF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E9188DC3-0640-4E82-8AD2-2565F80E9C48</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1BC16572-D29B-43E0-862D-290405D712A7</key>
 		<array>
 			<dict>
@@ -72,6 +95,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>81EC5914-414E-40E5-88B7-66EA7517F6AF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>8DFF65D2-524C-4ACD-8268-86E133E257E8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0E27CEEA-DBBC-45EB-B020-62F902056913</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -244,7 +280,7 @@
 				<key>escaping</key>
 				<integer>64</integer>
 				<key>script</key>
-				<string>python app.py '{query}'</string>
+				<string>/opt/homebrew/Caskroom/miniconda/base/bin/python app.py '{query}'</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -264,6 +300,8 @@
 			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
+				<key>keyword</key>
+				<string>frontmost app version</string>
 				<key>subtext</key>
 				<string>Copy version information for the frontmost application</string>
 				<key>text</key>
@@ -305,8 +343,8 @@
 				<key>escaping</key>
 				<integer>64</integer>
 				<key>script</key>
-				<string>APP=$(python app.py '{query}')
-SYSTEM=$(python system.py)
+				<string>APP=$(/opt/homebrew/Caskroom/miniconda/base/bin/python app.py '{query}')
+SYSTEM=$(/opt/homebrew/Caskroom/miniconda/base/bin/python system.py)
 echo -n "$APP on $SYSTEM"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
@@ -330,7 +368,7 @@ echo -n "$APP on $SYSTEM"</string>
 				<key>escaping</key>
 				<integer>64</integer>
 				<key>script</key>
-				<string>python app.py '{query}'</string>
+				<string>/opt/homebrew/Caskroom/miniconda/base/bin/python app.py '{query}'</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -458,8 +496,8 @@ echo -n "$APP on $SYSTEM"</string>
 				<key>escaping</key>
 				<integer>64</integer>
 				<key>script</key>
-				<string>APP=$(python app.py '{query}')
-SYSTEM=$(python system.py)
+				<string>APP=$(/opt/homebrew/Caskroom/miniconda/base/bin/python app.py '{query}')
+SYSTEM=$(/opt/homebrew/Caskroom/miniconda/base/bin/python system.py)
 echo -n "$APP on $SYSTEM"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
@@ -502,7 +540,7 @@ echo -n "$APP on $SYSTEM"</string>
 				<key>escaping</key>
 				<integer>64</integer>
 				<key>script</key>
-				<string>python system.py</string>
+				<string>/opt/homebrew/Caskroom/miniconda/base/bin/python system.py</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -523,7 +561,7 @@ echo -n "$APP on $SYSTEM"</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>version</string>
+				<string>verm</string>
 				<key>subtext</key>
 				<string>Copy version information for your operating system</string>
 				<key>text</key>
@@ -546,7 +584,7 @@ echo -n "$APP on $SYSTEM"</string>
 				<key>escaping</key>
 				<integer>64</integer>
 				<key>script</key>
-				<string>python system.py</string>
+				<string>/opt/homebrew/Caskroom/miniconda/base/bin/python system.py</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -561,100 +599,223 @@ echo -n "$APP on $SYSTEM"</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>anchorfields</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>daterange</key>
+				<integer>0</integer>
+				<key>fields</key>
+				<array>
+					<dict>
+						<key>field</key>
+						<string>kMDItemDisplayName</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemAlternateNames</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemFinderComment</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+				</array>
+				<key>includesystem</key>
+				<false/>
+				<key>keyword</key>
+				<string>appid</string>
+				<key>limit</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>scopes</key>
+				<array>
+					<string>/Applications</string>
+					<string>~/Applications</string>
+					<string>~/Downloads</string>
+				</array>
+				<key>sortmode</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>Copy version information for the app you select</string>
+				<key>title</key>
+				<string>App ID for Installed App…</string>
+				<key>types</key>
+				<array>
+					<string>com.apple.application-bundle</string>
+				</array>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.filefilter</string>
+			<key>uid</key>
+			<string>8DFF65D2-524C-4ACD-8268-86E133E257E8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>64</integer>
+				<key>script</key>
+				<string>osascript -e 'id of app "{query}"'</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0E27CEEA-DBBC-45EB-B020-62F902056913</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>0E27CEEA-DBBC-45EB-B020-62F902056913</key>
+		<dict>
+			<key>xpos</key>
+			<real>505</real>
+			<key>ypos</key>
+			<real>775</real>
+		</dict>
 		<key>1BC16572-D29B-43E0-862D-290405D712A7</key>
 		<dict>
 			<key>xpos</key>
-			<integer>500</integer>
+			<real>500</real>
 			<key>ypos</key>
 			<real>370</real>
 		</dict>
 		<key>1D100C10-4B5F-470E-B120-45CDBA583869</key>
 		<dict>
 			<key>xpos</key>
-			<integer>500</integer>
+			<real>500</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>615</real>
 		</dict>
 		<key>6161FA19-B444-437C-BB33-AC021FB3C526</key>
 		<dict>
 			<key>xpos</key>
-			<integer>500</integer>
+			<real>500</real>
 			<key>ypos</key>
-			<real>10</real>
+			<real>15</real>
 		</dict>
 		<key>658B5232-AE2A-4F33-8BEC-A8261342E2A4</key>
 		<dict>
 			<key>xpos</key>
-			<integer>500</integer>
+			<real>500</real>
 			<key>ypos</key>
 			<real>490</real>
 		</dict>
 		<key>81EC5914-414E-40E5-88B7-66EA7517F6AF</key>
 		<dict>
 			<key>xpos</key>
-			<integer>700</integer>
+			<real>705</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>265</real>
+		</dict>
+		<key>8DFF65D2-524C-4ACD-8268-86E133E257E8</key>
+		<dict>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>775</real>
 		</dict>
 		<key>91C3901E-9BDE-443A-BD68-3DAD102F82F4</key>
 		<dict>
 			<key>xpos</key>
-			<integer>200</integer>
+			<real>200</real>
 			<key>ypos</key>
-			<integer>30</integer>
+			<real>30</real>
 		</dict>
 		<key>9BBB433B-BDFA-4D72-85C5-7CC10EB4B655</key>
 		<dict>
 			<key>xpos</key>
-			<integer>500</integer>
+			<real>500</real>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
 		<key>A2982B81-290D-4CA4-888B-2FCE30596E7B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>500</integer>
+			<real>500</real>
 			<key>ypos</key>
 			<real>250</real>
 		</dict>
 		<key>A34EE2C1-24D9-4172-9BCF-2A692D34D4E2</key>
 		<dict>
 			<key>xpos</key>
-			<integer>205</integer>
+			<real>205</real>
 			<key>ypos</key>
-			<integer>540</integer>
+			<real>540</real>
 		</dict>
 		<key>CB359148-1C33-4729-B775-552CF3CAAE2F</key>
 		<dict>
 			<key>xpos</key>
-			<integer>200</integer>
+			<real>200</real>
 			<key>ypos</key>
-			<integer>280</integer>
+			<real>275</real>
 		</dict>
 		<key>E81D434A-1AB7-4B78-ABA9-64CC837878BF</key>
 		<dict>
 			<key>xpos</key>
-			<integer>700</integer>
+			<real>700</real>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
 		<key>E9188DC3-0640-4E82-8AD2-2565F80E9C48</key>
 		<dict>
 			<key>xpos</key>
-			<integer>700</integer>
+			<real>700</real>
 			<key>ypos</key>
 			<real>490</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/johan456789/Versions.alfredworkflow</string>
 </dict>
