@@ -280,7 +280,7 @@
 				<key>escaping</key>
 				<integer>64</integer>
 				<key>script</key>
-				<string>/opt/homebrew/Caskroom/miniconda/base/bin/python app.py '{query}'</string>
+				<string>/usr/bin/python3 app.py '{query}'</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -343,8 +343,8 @@
 				<key>escaping</key>
 				<integer>64</integer>
 				<key>script</key>
-				<string>APP=$(/opt/homebrew/Caskroom/miniconda/base/bin/python app.py '{query}')
-SYSTEM=$(/opt/homebrew/Caskroom/miniconda/base/bin/python system.py)
+				<string>APP=$(/usr/bin/python3 app.py '{query}')
+SYSTEM=$(/usr/bin/python3 system.py)
 echo -n "$APP on $SYSTEM"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
@@ -368,7 +368,7 @@ echo -n "$APP on $SYSTEM"</string>
 				<key>escaping</key>
 				<integer>64</integer>
 				<key>script</key>
-				<string>/opt/homebrew/Caskroom/miniconda/base/bin/python app.py '{query}'</string>
+				<string>/usr/bin/python3 app.py '{query}'</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -496,8 +496,8 @@ echo -n "$APP on $SYSTEM"</string>
 				<key>escaping</key>
 				<integer>64</integer>
 				<key>script</key>
-				<string>APP=$(/opt/homebrew/Caskroom/miniconda/base/bin/python app.py '{query}')
-SYSTEM=$(/opt/homebrew/Caskroom/miniconda/base/bin/python system.py)
+				<string>APP=$(/usr/bin/python3 app.py '{query}')
+SYSTEM=$(/usr/bin/python3 system.py)
 echo -n "$APP on $SYSTEM"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
@@ -540,7 +540,7 @@ echo -n "$APP on $SYSTEM"</string>
 				<key>escaping</key>
 				<integer>64</integer>
 				<key>script</key>
-				<string>/opt/homebrew/Caskroom/miniconda/base/bin/python system.py</string>
+				<string>/usr/bin/python3 system.py</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -584,7 +584,7 @@ echo -n "$APP on $SYSTEM"</string>
 				<key>escaping</key>
 				<integer>64</integer>
 				<key>script</key>
-				<string>/opt/homebrew/Caskroom/miniconda/base/bin/python system.py</string>
+				<string>/usr/bin/python3 system.py</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>

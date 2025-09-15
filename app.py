@@ -1,51 +1,57 @@
 import plistlib
+import sys
 from AppKit import NSWorkspace
-from sys import stdout
-from sys import argv
-from xml.parsers.expat import ExpatError
 
+def get_frontmost_app_path():
+    """Get the path of the frontmost application."""
+    return NSWorkspace.sharedWorkspace().activeApplication().get('NSApplicationPath')
 
-def binary_plist_to_file_obj(filename):
-    "Pipe the binary plist through plutil and return as file object"
-    from subprocess import Popen, PIPE
-    from StringIO import StringIO
+def get_app_info(app_path):
+    """Retrieve application information from its Info.plist."""
+    info_plist_path = f"{app_path}/Contents/Info.plist"
 
-    with open(filename, "rb") as f:
-        content = f.read()
-    args = ["plutil", "-convert", "xml1", "-o", "-", "--", "-"]
-    p = Popen(args, stdin=PIPE, stdout=PIPE)
-    out, err = p.communicate(content)
-    return StringIO(out)
+    try:
+        with open(info_plist_path, 'rb') as f:
+            return plistlib.load(f)
+    except FileNotFoundError:
+        sys.stderr.write(f"Error: Info.plist not found for {app_path}\n")
+        return None
+    except Exception as e:
+        sys.stderr.write(f"Error reading plist for {app_path}: {e}\n")
+        return None
 
+def format_version(info):
+    """Format the application version string."""
+    short_version = info.get('CFBundleShortVersionString')
+    bundle_version = info.get('CFBundleVersion')
 
-path = ''
+    if short_version and bundle_version and short_version != bundle_version:
+        return f"{short_version} ({bundle_version})"
+    return short_version or bundle_version or "Unknown"
 
-if len(argv) > 1:
-    path = argv[1]
+def get_app_name(info):
+    """Get the application's display name."""
+    return info.get('CFBundleDisplayName') or info.get('CFBundleName') or info.get('CFBundleExecutable')
 
-if path == '':
-    path = NSWorkspace.sharedWorkspace().activeApplication().get('NSApplicationPath')
+def main():
+    """Main function to get and print app version info."""
+    if len(sys.argv) > 1:
+        app_path = sys.argv[1]
+    else:
+        app_path = get_frontmost_app_path()
 
-path += '/Contents/Info.plist'
-try:
-    with open(path, 'rb') as f:
-        info = plistlib.load(f)
-except(ExpatError):  # binary plist
-    with open(binary_plist_to_file_obj(path), 'rb') as f:
-        info = plistlib.load(f)
+    if not app_path:
+        sys.stderr.write("Error: Could not determine application path.\n")
+        sys.exit(1)
 
-appName = info.get('CFBundleExecutable')
-if 'CFBundleDisplayName' in info:
-    appName = info.get('CFBundleDisplayName')
-elif 'CFBundleName' in info:
-    appName = info.get('CFBundleName')
+    info = get_app_info(app_path)
+    if not info:
+        sys.exit(1)
 
-appVersion = info.get('CFBundleVersion')
-appShortVersion = info.get('CFBundleShortVersionString')
-if appShortVersion and appVersion:
-    if appVersion != appShortVersion:
-        appVersion = appShortVersion + ' (' + appVersion + ')'
-elif not appVersion and appShortVersion:
-    appVersion = appShortVersion
+    app_name = get_app_name(info)
+    app_version = format_version(info)
 
-stdout.write(appName + ' v' + appVersion)
+    sys.stdout.write(f"{app_name} v{app_version}")
+
+if __name__ == "__main__":
+    main()
