@@ -1,3 +1,9 @@
+# /// script
+# dependencies = [
+#   "pyobjc",
+# ]
+# ///
+
 import plistlib
 from AppKit import NSWorkspace
 from sys import stdout
@@ -30,7 +36,7 @@ path += '/Contents/Info.plist'
 try:
     with open(path, 'rb') as f:
         info = plistlib.load(f)
-except(ExpatError):  # binary plist
+except (ExpatError):  # binary plist
     with open(binary_plist_to_file_obj(path), 'rb') as f:
         info = plistlib.load(f)
 

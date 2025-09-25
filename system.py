@@ -1,3 +1,9 @@
+# /// script
+# dependencies = [
+#   "pyobjc",
+# ]
+# ///
+
 from subprocess import check_output
 from sys import stdout
 
